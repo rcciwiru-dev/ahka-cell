@@ -1,18 +1,629 @@
 <!doctype html>
 <html lang="id">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#123b66"><meta name="description" content="Kasir dan pencatatan usaha AHKA CELL"><link rel="manifest" href="manifest.json"><link rel="stylesheet" href="style.css"><title>AHKA CELL</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#123b66">
+  <meta name="description" content="Kasir dan pencatatan usaha AHKA CELL">
+  <title>AHKA CELL</title>
+  <style>
+    :root {
+      --primary: #123b66;
+      --bg: #f4f6f9;
+      --card-bg: #ffffff;
+      --text: #333333;
+      --danger: #d9534f;
+      --success: #2e7d32;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      padding-bottom: 60px;
+    }
+
+    header {
+      background-color: var(--primary);
+      color: #fff;
+      padding: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      background-color: #ffffff;
+      padding: 2px;
+    }
+
+    header h1 {
+      font-size: 18px;
+    }
+
+    header small {
+      opacity: 0.8;
+    }
+
+    main {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 12px;
+    }
+
+    /* Stats Cards */
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .stats article {
+      background: var(--card-bg);
+      padding: 12px;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .stats small {
+      color: #666;
+      font-size: 12px;
+    }
+
+    .stats strong {
+      display: block;
+      font-size: 16px;
+      margin: 4px 0;
+      color: var(--primary);
+    }
+
+    .stats span {
+      font-size: 10px;
+      color: #888;
+    }
+
+    /* Navigation Tabs */
+    nav {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      margin-bottom: 16px;
+    }
+
+    .tab {
+      background: #e0e0e0;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-weight: 600;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    .tab.active {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    /* Forms & Panels */
+    .panel {
+      background: var(--card-bg);
+      padding: 16px;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+
+    .panel h2 {
+      font-size: 16px;
+      margin-bottom: 12px;
+    }
+
+    form label {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+
+    form input, form select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 4px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    .two {
+      display: flex;
+      gap: 10px;
+    }
+
+    .two label {
+      flex: 1;
+    }
+
+    button.primary {
+      width: 100%;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+
+    button.secondary {
+      background: #6c757d;
+      color: #fff;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button.danger {
+      background: var(--danger);
+      color: #fff;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .hint {
+      font-size: 12px;
+      color: #777;
+      margin-top: 10px;
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    /* List & Cards */
+    .list {
+      margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .card {
+      border: 1px solid #eee;
+      padding: 10px;
+      border-radius: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fafafa;
+    }
+
+    .badge-success {
+      background: #e8f5e9;
+      color: var(--success);
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 11px;
+      color: #888;
+      padding: 12px;
+    }
+  </style>
 </head>
 <body>
-<header><div class="brand"><div class="logo">AC</div><div><h1>AHKA CELL</h1><small>Kasir & Catatan Usaha</small></div></div><span id="syncBadge" class="pill">Mode demo</span></header>
-<main>
-<section class="stats"><article><small>Penjualan</small><strong id="salesTotal">Rp0</strong><span>Semua transaksi</span></article><article><small>Laba kotor</small><strong id="profitTotal">Rp0</strong><span>Estimasi</span></article><article><small>Piutang pelanggan</small><strong id="debtTotal">Rp0</strong><span>Belum lunas</span></article><article><small>Deposit agen</small><strong id="depositTotal">Rp0</strong><span>Saldo tercatat</span></article></section>
-<nav><button class="tab active" data-tab="sale">Penjualan</button><button class="tab" data-tab="debt">Utang</button><button class="tab" data-tab="products">Produk</button><button class="tab" data-tab="deposit">Deposit</button><button class="tab" data-tab="report">Laporan</button></nav>
-<section id="sale" class="panel"><h2>Catat penjualan</h2><form id="saleForm"><label>Nama produk<input id="productName" required placeholder="Contoh: Pulsa Telkomsel 20rb"></label><div class="two"><label>Kategori<select id="category"><option>Pulsa</option><option>Paket data</option><option>Token listrik</option><option>PPOB</option><option>Aksesori HP</option><option>Lainnya</option></select></label><label>Jumlah<input id="qty" type="number" min="1" value="1" required></label></div><div class="two"><label>Modal total (Rp)<input id="cost" type="number" min="0" required placeholder="9000"></label><label>Harga jual total (Rp)<input id="price" type="number" min="0" required placeholder="12000"></label></div><label>Nama pelanggan (opsional)<input id="customer" placeholder="Nama pelanggan"></label><label>Metode pembayaran<select id="payment"><option value="Tunai">Tunai</option><option value="Transfer/QRIS">Transfer/QRIS</option><option value="Utang">Utang pelanggan</option><option value="Sebagian">Bayar sebagian</option></select></label><div id="partialWrap" hidden><label>Jumlah dibayar sekarang (Rp)<input id="paid" type="number" min="0" value="0"></label></div><button class="primary" type="submit">Simpan transaksi</button></form><p class="hint">Data saat ini tersimpan di browser HP ini saja. Sinkronisasi online belum aktif.</p></section>
-<section id="debt" class="panel" hidden><h2>Catatan utang pelanggan</h2><form id="debtForm"><label>Nama pelanggan<input id="debtCustomer" required placeholder="Nama pelanggan"></label><label>Nomor HP (opsional)<input id="debtPhone" inputmode="tel" placeholder="08xxxxxxxxxx"></label><label>Keterangan<input id="debtDesc" required placeholder="Pulsa, paket data, aksesori..."></label><div class="two"><label>Total tagihan (Rp)<input id="debtAmount" type="number" min="1" required></label><label>Dibayar (Rp)<input id="debtPaid" type="number" min="0" value="0" required></label></div><label>Jatuh tempo (opsional)<input id="dueDate" type="date"></label><button class="primary">Tambah catatan utang</button></form><div id="debtList" class="list"></div></section>
-<section id="products" class="panel" hidden><h2>Daftar produk & stok</h2><form id="productForm"><label>Nama produk<input id="stockName" required></label><div class="two"><label>Modal/unit (Rp)<input id="stockCost" type="number" min="0" required></label><label>Jual/unit (Rp)<input id="stockPrice" type="number" min="0" required></label></div><div class="two"><label>Stok awal<input id="stockQty" type="number" min="0" value="0" required></label><label>Kategori<select id="stockCategory"><option>Aksesori HP</option><option>Pulsa</option><option>Paket data</option><option>Token listrik</option><option>PPOB</option><option>Lainnya</option></select></label></div><button class="primary">Simpan produk</button></form><div id="productList" class="list"></div></section>
-<section id="deposit" class="panel" hidden><h2>Deposit agen</h2><form id="depositForm"><label>Nama agen/provider<input id="agentName" required placeholder="Nama distributor/agen"></label><label>Jenis mutasi<select id="depositType"><option value="in">Tambah deposit</option><option value="out">Pemakaian deposit</option></select></label><label>Nominal (Rp)<input id="depositAmount" type="number" min="1" required></label><label>Catatan<input id="depositNote" placeholder="Transfer deposit / transaksi pulsa"></label><button class="primary">Simpan mutasi</button></form><div id="depositList" class="list"></div></section>
-<section id="report" class="panel" hidden><h2>Riwayat transaksi</h2><div class="toolbar"><button id="exportBtn" class="secondary">Ekspor CSV</button><button id="clearBtn" class="danger">Hapus data demo</button></div><div id="salesList" class="list"></div></section>
-</main><footer>AHKA CELL • Versi prototipe • Jangan gunakan sebagai satu-satunya catatan keuangan.</footer>
-<script type="module" src="app.js"></script>
-</body></html>
+  <header>
+    <div class="brand">
+      <img src="logo.png" alt="AHKA CELL Logo" class="logo-img">
+      <div>
+        <h1>AHKA CELL</h1>
+        <small>Kasir & Catatan Usaha</small>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="stats">
+      <article><small>Penjualan</small><strong id="salesTotal">Rp0</strong><span>Semua transaksi</span></article>
+      <article><small>Laba kotor</small><strong id="profitTotal">Rp0</strong><span>Estimasi</span></article>
+      <article><small>Piutang pelanggan</small><strong id="debtTotal">Rp0</strong><span>Belum lunas</span></article>
+      <article><small>Deposit agen</small><strong id="depositTotal">Rp0</strong><span>Saldo tercatat</span></article>
+    </section>
+
+    <nav>
+      <button class="tab active" data-tab="sale">Penjualan</button>
+      <button class="tab" data-tab="debt">Utang</button>
+      <button class="tab" data-tab="products">Produk</button>
+      <button class="tab" data-tab="deposit">Deposit</button>
+      <button class="tab" data-tab="report">Laporan</button>
+    </nav>
+
+    <section id="sale" class="panel">
+      <h2>Catat penjualan</h2>
+      <form id="saleForm">
+        <label>Nama produk<input id="productName" required placeholder="Contoh: Pulsa Telkomsel 20rb"></label>
+        <div class="two">
+          <label>Kategori
+            <select id="category">
+              <option>Pulsa</option>
+              <option>Paket data</option>
+              <option>Token listrik</option>
+              <option>PPOB</option>
+              <option>Aksesori HP</option>
+              <option>Lainnya</option>
+            </select>
+          </label>
+          <label>Jumlah<input id="qty" type="number" min="1" value="1" required></label>
+        </div>
+        <div class="two">
+          <label>Modal total (Rp)<input id="cost" type="number" min="0" required placeholder="9000"></label>
+          <label>Harga jual total (Rp)<input id="price" type="number" min="0" required placeholder="12000"></label>
+        </div>
+        <label>Nama pelanggan (opsional)<input id="customer" placeholder="Nama pelanggan"></label>
+        <label>Metode pembayaran
+          <select id="payment">
+            <option value="Tunai">Tunai</option>
+            <option value="Transfer/QRIS">Transfer/QRIS</option>
+            <option value="Utang">Utang pelanggan</option>
+            <option value="Sebagian">Bayar sebagian</option>
+          </select>
+        </label>
+        <div id="partialWrap" hidden>
+          <label>Jumlah dibayar sekarang (Rp)<input id="paid" type="number" min="0" value="0"></label>
+        </div>
+        <button class="primary" type="submit">Simpan transaksi</button>
+      </form>
+      <p class="hint">Data tersimpan otomatis di penyimpanan lokal browser HP/Komputer ini.</p>
+    </section>
+
+    <section id="debt" class="panel" hidden>
+      <h2>Catatan utang pelanggan</h2>
+      <form id="debtForm">
+        <label>Nama pelanggan<input id="debtCustomer" required placeholder="Nama pelanggan"></label>
+        <label>Nomor HP (opsional)<input id="debtPhone" inputmode="tel" placeholder="08xxxxxxxxxx"></label>
+        <label>Keterangan<input id="debtDesc" required placeholder="Pulsa, paket data, aksesori..."></label>
+        <div class="two">
+          <label>Total tagihan (Rp)<input id="debtAmount" type="number" min="1" required></label>
+          <label>Dibayar (Rp)<input id="debtPaid" type="number" min="0" value="0" required></label>
+        </div>
+        <label>Jatuh tempo (opsional)<input id="dueDate" type="date"></label>
+        <button class="primary" type="submit">Tambah catatan utang</button>
+      </form>
+      <div id="debtList" class="list"></div>
+    </section>
+
+    <section id="products" class="panel" hidden>
+      <h2>Daftar produk & stok</h2>
+      <form id="productForm">
+        <label>Nama produk<input id="stockName" required></label>
+        <div class="two">
+          <label>Modal/unit (Rp)<input id="stockCost" type="number" min="0" required></label>
+          <label>Jual/unit (Rp)<input id="stockPrice" type="number" min="0" required></label>
+        </div>
+        <div class="two">
+          <label>Stok awal<input id="stockQty" type="number" min="0" value="0" required></label>
+          <label>Kategori
+            <select id="stockCategory">
+              <option>Aksesori HP</option>
+              <option>Pulsa</option>
+              <option>Paket data</option>
+              <option>Token listrik</option>
+              <option>PPOB</option>
+              <option>Lainnya</option>
+            </select>
+          </label>
+        </div>
+        <button class="primary" type="submit">Simpan produk</button>
+      </form>
+      <div id="productList" class="list"></div>
+    </section>
+
+    <section id="deposit" class="panel" hidden>
+      <h2>Deposit agen</h2>
+      <form id="depositForm">
+        <label>Nama agen/provider<input id="agentName" required placeholder="Nama distributor/agen"></label>
+        <label>Jenis mutasi
+          <select id="depositType">
+            <option value="in">Tambah deposit</option>
+            <option value="out">Pemakaian deposit</option>
+          </select>
+        </label>
+        <label>Nominal (Rp)<input id="depositAmount" type="number" min="1" required></label>
+        <label>Catatan<input id="depositNote" placeholder="Transfer deposit / transaksi pulsa"></label>
+        <button class="primary" type="submit">Simpan mutasi</button>
+      </form>
+      <div id="depositList" class="list"></div>
+    </section>
+
+    <section id="report" class="panel" hidden>
+      <h2>Riwayat transaksi</h2>
+      <div class="toolbar">
+        <button id="exportBtn" class="secondary">Ekspor CSV</button>
+        <button id="clearBtn" class="danger">Hapus semua data</button>
+      </div>
+      <div id="salesList" class="list"></div>
+    </section>
+  </main>
+
+  <footer>AHKA CELL • Aplikasi Kasir Usaha</footer>
+
+  <script>
+    // State & Storage Initialization
+    const STORAGE_KEY = 'AHKA_CELL_DATA';
+
+    let state = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {
+      sales: [],
+      debts: [],
+      products: [],
+      deposits: []
+    };
+
+    function saveData() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      renderAll();
+    }
+
+    // Utility Helpers
+    const formatRp = (num) => 'Rp' + Number(num || 0).toLocaleString('id-ID');
+
+    // Navigation Tabs
+    document.querySelectorAll('nav .tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('nav .tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.panel').forEach(p => p.hidden = true);
+        
+        tab.classList.add('active');
+        const target = tab.getAttribute('data-tab');
+        document.getElementById(target).hidden = false;
+      });
+    });
+
+    // Toggle Partial Payment Input
+    const paymentSelect = document.getElementById('payment');
+    const partialWrap = document.getElementById('partialWrap');
+    paymentSelect.addEventListener('change', (e) => {
+      partialWrap.hidden = e.target.value !== 'Sebagian';
+    });
+
+    // Render UI Components
+    function renderStats() {
+      const totalSales = state.sales.reduce((acc, s) => acc + Number(s.price), 0);
+      const totalCost = state.sales.reduce((acc, s) => acc + Number(s.cost), 0);
+      const profit = totalSales - totalCost;
+
+      const totalDebt = state.debts.reduce((acc, d) => acc + (Number(d.amount) - Number(d.paid)), 0);
+
+      const depositIn = state.deposits.filter(d => d.type === 'in').reduce((acc, d) => acc + Number(d.amount), 0);
+      const depositOut = state.deposits.filter(d => d.type === 'out').reduce((acc, d) => acc + Number(d.amount), 0);
+      const totalDeposit = depositIn - depositOut;
+
+      document.getElementById('salesTotal').textContent = formatRp(totalSales);
+      document.getElementById('profitTotal').textContent = formatRp(profit);
+      document.getElementById('debtTotal').textContent = formatRp(totalDebt);
+      document.getElementById('depositTotal').textContent = formatRp(totalDeposit);
+    }
+
+    function renderSales() {
+      const salesList = document.getElementById('salesList');
+      salesList.innerHTML = state.sales.length === 0 
+        ? '<p class="hint">Belum ada transaksi.</p>' 
+        : state.sales.slice().reverse().map((s) => `
+            <div class="card">
+              <div>
+                <strong>${s.productName}</strong> <small>(${s.category})</small>
+                <div><small>${s.date} • ${s.payment} • Pelanggan: ${s.customer || '-'}</small></div>
+              </div>
+              <div>
+                <strong>${formatRp(s.price)}</strong>
+                <div><small>Laba: ${formatRp(s.price - s.cost)}</small></div>
+              </div>
+            </div>
+          `).join('');
+    }
+
+    function renderDebts() {
+      const debtList = document.getElementById('debtList');
+      debtList.innerHTML = state.debts.length === 0 
+        ? '<p class="hint">Tidak ada catatan utang.</p>' 
+        : state.debts.map((d, index) => {
+            const sisa = d.amount - d.paid;
+            return `
+              <div class="card">
+                <div>
+                  <strong>${d.customer}</strong> ${d.phone ? `<small>(${d.phone})</small>` : ''}
+                  <div><small>${d.desc} ${d.dueDate ? `• JT: ${d.dueDate}` : ''}</small></div>
+                  <div><small>Sisa Tagihan: <strong style="color:#d9534f;">${formatRp(sisa)}</strong></small></div>
+                </div>
+                <div>
+                  ${sisa > 0 ? `<button class="secondary btn-pay" data-index="${index}">Pelunasan</button>` : '<span class="badge-success">Lunas</span>'}
+                </div>
+              </div>
+            `;
+          }).join('');
+
+      document.querySelectorAll('.btn-pay').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const idx = e.target.getAttribute('data-index');
+          const payInput = prompt(`Bayar utang untuk ${state.debts[idx].customer}:`, state.debts[idx].amount - state.debts[idx].paid);
+          if (payInput !== null && !isNaN(payInput) && payInput > 0) {
+            state.debts[idx].paid = Number(state.debts[idx].paid) + Number(payInput);
+            saveData();
+          }
+        });
+      });
+    }
+
+    function renderProducts() {
+      const productList = document.getElementById('productList');
+      productList.innerHTML = state.products.length === 0 
+        ? '<p class="hint">Belum ada produk tersimpan.</p>' 
+        : state.products.map(p => `
+            <div class="card">
+              <div>
+                <strong>${p.name}</strong> <small>(${p.category})</small>
+                <div><small>Modal: ${formatRp(p.cost)} | Jual: ${formatRp(p.price)}</small></div>
+              </div>
+              <div>
+                <strong>Stok: ${p.qty}</strong>
+              </div>
+            </div>
+          `).join('');
+    }
+
+    function renderDeposits() {
+      const depositList = document.getElementById('depositList');
+      depositList.innerHTML = state.deposits.length === 0 
+        ? '<p class="hint">Belum ada mutasi deposit.</p>' 
+        : state.deposits.slice().reverse().map(d => `
+            <div class="card">
+              <div>
+                <strong>${d.agent}</strong>
+                <div><small>${d.note || '-'} • ${d.date}</small></div>
+              </div>
+              <div>
+                <strong style="color: ${d.type === 'in' ? '#2e7d32' : '#d9534f'}">
+                  ${d.type === 'in' ? '+' : '-'}${formatRp(d.amount)}
+                </strong>
+              </div>
+            </div>
+          `).join('');
+    }
+
+    function renderAll() {
+      renderStats();
+      renderSales();
+      renderDebts();
+      renderProducts();
+      renderDeposits();
+    }
+
+    // Form Handlers
+    document.getElementById('saleForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const price = Number(document.getElementById('price').value);
+      const cost = Number(document.getElementById('cost').value);
+      const payment = document.getElementById('payment').value;
+      const customer = document.getElementById('customer').value;
+      const productName = document.getElementById('productName').value;
+
+      const sale = {
+        productName,
+        category: document.getElementById('category').value,
+        qty: Number(document.getElementById('qty').value),
+        cost,
+        price,
+        customer,
+        payment,
+        date: new Date().toLocaleString('id-ID')
+      };
+
+      state.sales.push(sale);
+
+      if (payment === 'Utang') {
+        state.debts.push({ customer: customer || 'Tanpa Nama', phone: '', desc: productName, amount: price, paid: 0, dueDate: '' });
+      } else if (payment === 'Sebagian') {
+        const paid = Number(document.getElementById('paid').value);
+        state.debts.push({ customer: customer || 'Tanpa Nama', phone: '', desc: productName, amount: price, paid: paid, dueDate: '' });
+      }
+
+      e.target.reset();
+      partialWrap.hidden = true;
+      saveData();
+    });
+
+    document.getElementById('debtForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      state.debts.push({
+        customer: document.getElementById('debtCustomer').value,
+        phone: document.getElementById('debtPhone').value,
+        desc: document.getElementById('debtDesc').value,
+        amount: Number(document.getElementById('debtAmount').value),
+        paid: Number(document.getElementById('debtPaid').value),
+        dueDate: document.getElementById('dueDate').value
+      });
+      e.target.reset();
+      saveData();
+    });
+
+    document.getElementById('productForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      state.products.push({
+        name: document.getElementById('stockName').value,
+        cost: Number(document.getElementById('stockCost').value),
+        price: Number(document.getElementById('stockPrice').value),
+        qty: Number(document.getElementById('stockQty').value),
+        category: document.getElementById('stockCategory').value
+      });
+      e.target.reset();
+      saveData();
+    });
+
+    document.getElementById('depositForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      state.deposits.push({
+        agent: document.getElementById('agentName').value,
+        type: document.getElementById('depositType').value,
+        amount: Number(document.getElementById('depositAmount').value),
+        note: document.getElementById('depositNote').value,
+        date: new Date().toLocaleString('id-ID')
+      });
+      e.target.reset();
+      saveData();
+    });
+
+    // Export CSV & Clear Data
+    document.getElementById('exportBtn').addEventListener('click', () => {
+      if (state.sales.length === 0) return alert('Tidak ada data penjualan untuk diekspor.');
+      let csv = 'Tanggal,Produk,Kategori,Jumlah,Modal,Harga Jual,Pelanggan,Metode\n';
+      state.sales.forEach(s => {
+        csv += `"${s.date}","${s.productName}","${s.category}",${s.qty},${s.cost},${s.price},"${s.customer}","${s.payment}"\n`;
+      });
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.setAttribute('href', url);
+      a.setAttribute('download', `Laporan_AHKA_CELL_${new Date().toISOString().slice(0,10)}.csv`);
+      a.click();
+    });
+
+    document.getElementById('clearBtn').addEventListener('click', () => {
+      if (confirm('Yakin ingin menghapus seluruh data transaksi?')) {
+        state = { sales: [], debts: [], products: [], deposits: [] };
+        saveData();
+      }
+    });
+
+    // Initial Render
+    renderAll();
+  </script>
+</body>
+</html>
